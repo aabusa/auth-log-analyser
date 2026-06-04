@@ -1,4 +1,6 @@
 from collections import Counter
+
+threshold = 10
 ip_counts = Counter()
 with open("data/sample_auth.log" , "r") as log_data :
     for line in log_data :
@@ -10,4 +12,5 @@ with open("data/sample_auth.log" , "r") as log_data :
             
 ranked_ips = ip_counts.most_common()
 for ip, count in ranked_ips:
-    print(f"{ip}  —  {count} failed attempts")        
+    if count >= threshold :
+        print("Ip suspected of brute force attempt " ,ip , "Failed Attempts",count)
